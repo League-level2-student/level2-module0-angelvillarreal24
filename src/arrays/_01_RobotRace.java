@@ -1,6 +1,5 @@
 package arrays;
 
-import java.lang.reflect.Array;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -25,22 +24,43 @@ public class _01_RobotRace {
 		// 5. use another for loop to iterate through the array and make each robot move
 		// a random amount less than 50.
 		Random randy = new Random();
+		int r1Counter = 0;
+		int r2Counter = 0;
 		while (true) {
 			for (int i = 0; i < 2; i++) {
 				int routput = randy.nextInt(51);
 				robotArray[i].move(routput);
-				if (robotArray[i].getY() < 100) {
+				if (robotArray[i].getY() < 50) {
 					robotArray[i].turn(90);
-					robotArray[i].setY(101);
-				} else if (robotArray[i].getX() < 100) {
+					robotArray[i].setY(50);
+				}
+				if (robotArray[i].getX() > 500) {
 					robotArray[i].turn(90);
-					robotArray[i].setX(101);
-				} else if (robotArray[i].getY() < 100) {
+					robotArray[i].setX(500);
+				}
+				if (robotArray[i].getY() > 500) {
 					robotArray[i].turn(90);
-					robotArray[i].setY(101);
-				} else if (robotArray[i].getY() < 100) {
-					robotArray[i].turn(90);
-					robotArray[i].setY(101);
+					robotArray[i].setY(500);
+				}
+				if (robotArray[1].getX() < 50) {
+					robotArray[1].turn(90);
+					robotArray[1].setX(50);
+					r1Counter++;
+				}
+				if (robotArray[0].getX() < 50) {
+					robotArray[0].turn(90);
+					robotArray[0].setX(50);
+					r2Counter++;
+				}
+				if(r2Counter==3) {
+					robotArray[0].sparkle();
+					JOptionPane.showMessageDialog(null, "We have a winner, robot 1!!");
+					System.exit(0);
+				}
+				if(r1Counter==3) {
+					robotArray[1].sparkle();
+					JOptionPane.showMessageDialog(null, "We have a winner, robot 2!!");
+					System.exit(0);
 				}
 			}
 		}
